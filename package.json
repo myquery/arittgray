@@ -8,8 +8,14 @@
     "start": "next start"
   },
   "dependencies": {
+    "dotenv": "^8.2.0",
+    "firebase": "^7.16.1",
     "next": "9.3.5",
+    "next-firebase": "^1.0.15",
     "react": "16.13.1",
-    "react-dom": "16.13.1"
+    "react-dom": "16.13.1",
+    "react-hook-form": "^6.0.7",
+    "react-media-hook": "^0.4.7",
+    "react-nextjs-toast": "^1.2.5"
   }
 }

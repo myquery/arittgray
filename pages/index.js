@@ -1,72 +1,280 @@
+import { useForm } from "react-hook-form";
+import { useMediaPredicate } from "react-media-hook";
+import { toast, ToastContainer } from 'react-nextjs-toast'
+
 import Head from 'next/head'
+import Layout from '../components/layout'
+import {loadDatabase} from "../lib/db"
 
 export default function Home() {
+  let db = loadDatabase()
+  const { register, handleSubmit, watch, errors} = useForm();
+  const onSubmit = async (data, e)=> {
+    let firebase = await loadDatabase(); 
+    let db = firebase.firestore();
+    e.target.reset();
+    return await db.collection("epoxy-registrants").add(data).then((res)=>{
+      toast.notify(`Your Training session is booked`, {
+        duration: 5,
+        type: "success"
+      })
+    })
+    // .catch((err)=>{
+    //   toast.notify(`Something went wrong, Training session can't be booked`)
+    // });
+  }
+  
+ 
+  const biggerThan400 = useMediaPredicate("(max-width: 400px)");
+  const biggerThan1824 = useMediaPredicate("(max-width: 1824px)");
+  // const biggerThan400 = useMediaPredicate("(max-width: 400px)");
   return (
+    <Layout>
+     
     <div className="container">
       <Head>
         <title>ArittGray-Epoxy floor/wall installer training</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main>
-        <h1 className="title">
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
+      {/* <main> */}
+        <div className="container">
+     
+          <div className="epoxy-bkg_1">
+        <h1>BE A CERTIFIED EPOXY 3D FLOOR/WALL INSTALLER IN 2 DAYS </h1>
+        <h2>Be Part of the practical Training!</h2>
 
-        <p className="description">
-          Get started by editing <code>pages/index.js</code>
-        </p>
-
-        <div className="grid">
-          <a href="https://nextjs.org/docs" className="card">
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className="card">
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/zeit/next.js/tree/master/examples"
-            className="card"
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className="card"
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
+        <div className="epoxy_images">
+          <img src="../images/epoxy_training_1.jpeg"/>
+          <img src="../images/epoxy_training_2.jpeg"/>
+          <img src="../images/epoxy_training_3.jpeg"/>
+          <img src="../images/epoxy_training_4.jpeg"/>
+          <img src="../images/epoxy_training_5.jpeg"/>
+          <img src="../images/epoxy_training_6.jpeg"/>
         </div>
-      </main>
+            </div>
+          <div className="epoxy-bkg_2">
+        
+          
+             {biggerThan1824 && <form className="epoxy-form" onSubmit={handleSubmit(onSubmit)}>
+             <ToastContainer align={"center"} position={"bottom"}/>
+                <h3>Epoxy Installer Training Registration</h3>
+                <label htmlFor="epoxy_training_fullname">Full name:
+              <input 
+                type="text" 
+                name="epoxy_training_fullname" 
+                placeholder="Your Full name" 
+                id="epoxy_training_fullname"
+                ref={register({ required: true })} />
+                {errors.epoxy_training_fullname && <span>This field is required</span>}
+            </label>
+              <label htmlFor="epoxy_training_email">Email:
+              <input type="email" 
+                     placeholder="Your Email" 
+                     id="epoxy_training_email"
+                     name="epoxy_training_email"
+                     ref={register({ required: true })} />
+                     {errors.epoxy_training_email && <span>This field is required</span>}
+              </label> 
+              <label htmlFor="epoxy__training_gender"> Gender:
+              <select 
+                type="text" 
+                placeholder="gender" 
+                id="epoxy_training_gender"
+                name="epoxy_training_gender"
+                ref={register({ required: true })} >
+                <option value="">-Select Gender-</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+              </select>
+              {errors.epoxy_training_gender && <span>This field is required</span>}
+             </label>
+              <label htmlFor="epoxy_training_phone">Phone number
+                <input 
+                id="epoxy_training_phone" 
+                type="tel" 
+                placeholder="Phone Number"
+                name="epoxy_training_phone"
+                ref={register({ required: true })}/>
+                 {errors.epoxy_training_phone && <span>This field is required</span>}
+                </label>
+              <label htmlFor="epoxy_training_interest">Training interested in
+              <select 
+                type="text" 
+                id="epoxy_training_interest"
+                name="epoxy_training_interest"
+                ref={register({ required: true })} >
+                <option value="">-Select Training interest-</option>
+                <option value="3d_epoxy_floor">3D epoxy floor installation</option>
+                <option value="3d_epoxy_wall">3D wall installation</option>
+                <option value="3d_ceiling_stretch">3D ceiling Stretch</option>
+                <option value="3d_epoxy_flakes">3D epoxy flakes</option>
+                <option value="3d_mettalic_floor">3D metallic floor/ walls</option>
+                </select>
+                {errors.epoxy_training_interest && <span>This field is required</span>}
+                </label>
+                <button type="submit">Register</button>
+            </form>} 
+            
+            
+          </div>
+            {/* <script src="/__/firebase/7.16.1/firebase-app.js"></script>
 
-      <footer>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className="logo" />
-        </a>
-      </footer>
+            <script src="/__/firebase/7.16.1/firebase-analytics.js"></script>
+
+            <script src="/__/firebase/init.js"></script> */}
+        </div>
+     
+        
+
+      {/* </main> */}
 
       <style jsx>{`
-        .container {
-          min-height: 100vh;
-          padding: 0 0.5rem;
-          display: flex;
-          flex-direction: column;
+
+        .epoxy-bkg_1{
+          display:flex;
           justify-content: center;
           align-items: center;
+          flex-direction:column;
+          width:100vw;
+          min-height: 100vh;
+          clip-path: polygon(0 0, 86% 0, 100% 100%, 0% 100%);
+          background-color:#000;
+          background: linear-gradient(rgba(17, 45, 78, 0.7),rgba(17,45,78,0.7)),url("../images/epoxy_training_8.jpeg") no-repeat;
+          background-position: center;
+          background-size: cover;
+          background-repeat: no-repeat;
+          -webkit-box-shadow: 0 20px 10px 0 #000; 
+          -moz-box-shadow: 0 20px 10px 0 #000;
+          box-shadow: 0 20px 10px 0 #000;
+          }
+           .epoxy-bkg_1{
+          display:flex;
+          justify-content: center;
+          align-items: center;
+          flex-direction:column;
+          width:100vw;
+          min-height: 100vh;
+          clip-path: polygon(0 0, 86% 0, 100% 100%, 0% 100%);
+          background-color:#000;
+          background: linear-gradient(rgba(17, 45, 78, 0.7),rgba(17,45,78,0.7)),url("../images/epoxy_training_8.jpeg") no-repeat;
+          background-position: center;
+          background-size: cover;
+          background-repeat: no-repeat;
+          -webkit-box-shadow: 0 20px 10px 0 #000; 
+          -moz-box-shadow: 0 20px 10px 0 #000;
+          box-shadow: 0 20px 10px 0 #000;
+          }
+
+
+        .epoxy-bkg_1 h1{
+          top:30%;
+          align-self:center;
+          color:#fff;
+          width: 80%;
+          font-size:3rem;
+          -webkit-text-shadow: 0 20px 0px 0 rgba(0,0,0,0.9); 
+          -moz-text-shadow: 0 20px 50px 0 rgba(0,0,0,0.9);
+          text-shadow: 0 20px 50px 0 rgba(0,0,0,0.9);
+          }
+          .epoxy-bkg_1 h2{
+            top:5%;
+            align-self:center;
+            color:#fff;
+            width: 80%;
+            font-size:2rem;
+            color:yellow;
+            }
+
+        .epoxy-bkg_2{
+          display:flex;
+          justify-content: center;
+          align-items: center;
+          width:70%;
+           
+
+        }
+
+        .epoxy_images{
+          display:flex;
+          justify-content: space-between;
+          align-items: center;
+         
+          
+        }
+        .epoxy_images img{
+          width:20%;
+          height:150px;
+         
+          padding:0.3rem;
+          -webkit-box-shadow: 0 20px 50px 0 #000; 
+          -moz-box-shadow: 0 20px 50px 0 #000;
+          box-shadow: 0 20px 50px 0 #000;
+       
+        }
+
+        .epoxy-form{
+          display:flex;
+          justify-content: center;
+          align-items: center;
+          flex-direction: column;
+          -webkit-box-shadow: 0 20px 50px 0 rgba(0,0,0,0.1); 
+          -moz-box-shadow: 0 20px 50px 0 rgba(0,0,0,0.1);
+          box-shadow: 0 20px 50px 0 rgba(0,0,0,0.1);
+          height: auto;
+          width:60%;
+          border-radius: 5px;
+          background-color:#fff;
+          padding:1.5rem;
+        }
+        .epoxy-form input{
+          width:100%;
+          height: 40px;
+          border-radius:5px;
+          display:block;
+          border:none;
+          padding:0.5rem;
+          background: #f1f1f1;
+          
+        }
+        .epoxy-form label{
+          width:100%;
+          margin:0.5rem 0;
+         
+        
+          }
+        .epoxy-form select{
+          width:100%;
+          height: 40px;
+          display:block;
+               
+        }
+        .epoxy-form button {
+          text-transform: uppercase;
+          outline: 0;
+          background: #041557;
+          width: 100%;
+          border: 0;
+          padding: 15px;
+          margin-top: 15px;
+          color: #FFFFFF;
+          font-size: 14px;
+          -webkit-transition: all 0.3 ease;
+          transition: all 0.3 ease;
+          cursor: pointer;
+          -webkit-box-shadow: 0 20px 50px 0 rgba(0,0,0,0.1); 
+          -moz-box-shadow: 0 20px 50px 0 rgba(0,0,0,0.1);
+          box-shadow: 0 20px 50px 0 rgba(0,0,0,0.1);
+        }
+        .container {
+          min-width:100%;
+          min-height: 100vh;
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          align-items: center;
+          background-color:#dedede;
+         
         }
 
         main {
@@ -76,6 +284,7 @@ export default function Home() {
           flex-direction: column;
           justify-content: center;
           align-items: center;
+         
         }
 
         footer {
@@ -205,5 +414,6 @@ export default function Home() {
         }
       `}</style>
     </div>
+    </Layout>
   )
 }
