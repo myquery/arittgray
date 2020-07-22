@@ -1,9 +1,9 @@
 import { useForm } from "react-hook-form";
-import { useMediaPredicate } from "react-media-hook";
 import { toast, ToastContainer } from 'react-nextjs-toast'
 
-import Head from 'next/head'
+import Link from 'next/link'
 import Layout from '../components/layout'
+
 import {loadDatabase} from "../lib/db"
 
 export default function Home() {
@@ -23,22 +23,15 @@ export default function Home() {
     //   toast.notify(`Something went wrong, Training session can't be booked`)
     // });
   }
-  
- 
-  const biggerThan400 = useMediaPredicate("(max-width: 400px)");
-  const biggerThan1824 = useMediaPredicate("(max-width: 1824px)");
-  // const biggerThan400 = useMediaPredicate("(max-width: 400px)");
+
   return (
     <Layout>
      
     <div className="container">
-      <Head>
-        <title>ArittGray-Epoxy floor/wall installer training</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+ 
 
       {/* <main> */}
-        <div className="container">
+    
      
           <div className="epoxy-bkg_1">
         <h1>BE A CERTIFIED EPOXY 3D FLOOR/WALL INSTALLER IN 2 DAYS </h1>
@@ -54,9 +47,8 @@ export default function Home() {
         </div>
             </div>
           <div className="epoxy-bkg_2">
-        
-          
-             {biggerThan1824 && <form className="epoxy-form" onSubmit={handleSubmit(onSubmit)}>
+          {/* <Link href="/login"><button>Login</button></Link> */}
+        <form className="epoxy-form" onSubmit={handleSubmit(onSubmit)}>
              <ToastContainer align={"center"} position={"bottom"}/>
                 <h3>Epoxy Installer Training Registration</h3>
                 <label htmlFor="epoxy_training_fullname">Full name:
@@ -114,7 +106,7 @@ export default function Home() {
                 {errors.epoxy_training_interest && <span>This field is required</span>}
                 </label>
                 <button type="submit">Register</button>
-            </form>} 
+                </form> 
             
             
           </div>
@@ -123,7 +115,7 @@ export default function Home() {
             <script src="/__/firebase/7.16.1/firebase-analytics.js"></script>
 
             <script src="/__/firebase/init.js"></script> */}
-        </div>
+
      
         
 
@@ -131,6 +123,16 @@ export default function Home() {
 
       <style jsx>{`
 
+        .container {
+          min-width:100%;
+          min-height: 100vh;
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          align-items: center;
+          background-color:#dedede;
+        
+        }
         .epoxy-bkg_1{
           display:flex;
           justify-content: center;
@@ -148,24 +150,6 @@ export default function Home() {
           -moz-box-shadow: 0 20px 10px 0 #000;
           box-shadow: 0 20px 10px 0 #000;
           }
-           .epoxy-bkg_1{
-          display:flex;
-          justify-content: center;
-          align-items: center;
-          flex-direction:column;
-          width:100vw;
-          min-height: 100vh;
-          clip-path: polygon(0 0, 86% 0, 100% 100%, 0% 100%);
-          background-color:#000;
-          background: linear-gradient(rgba(17, 45, 78, 0.7),rgba(17,45,78,0.7)),url("../images/epoxy_training_8.jpeg") no-repeat;
-          background-position: center;
-          background-size: cover;
-          background-repeat: no-repeat;
-          -webkit-box-shadow: 0 20px 10px 0 #000; 
-          -moz-box-shadow: 0 20px 10px 0 #000;
-          box-shadow: 0 20px 10px 0 #000;
-          }
-
 
         .epoxy-bkg_1 h1{
           top:30%;
@@ -183,7 +167,7 @@ export default function Home() {
             color:#fff;
             width: 80%;
             font-size:2rem;
-            color:yellow;
+            
             }
 
         .epoxy-bkg_2{
@@ -266,19 +250,7 @@ export default function Home() {
           -moz-box-shadow: 0 20px 50px 0 rgba(0,0,0,0.1);
           box-shadow: 0 20px 50px 0 rgba(0,0,0,0.1);
         }
-        .container {
-          min-width:100%;
-          min-height: 100vh;
-          display: flex;
-          flex-direction: row;
-          justify-content: center;
-          align-items: center;
-          background-color:#dedede;
-         
-        }
-
         main {
-          padding: 5rem 0;
           flex: 1;
           display: flex;
           flex-direction: column;
@@ -392,11 +364,64 @@ export default function Home() {
         }
 
         @media (max-width: 600px) {
-          .grid {
-            width: 100%;
+          .container {
+            min-width:100%;
+            min-height: 100vh;
+            display: flex;
             flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color:#dedede;
+           
           }
-        }
+          .epoxy-form{
+            flex-direction: column;
+            width:100%;
+            }
+            .epoxy-bkg_1{
+              display:flex;
+              justify-content: center;
+              align-items: center;
+              flex-direction:column;
+              width:100vw;
+              background-position: center;
+              background-size: cover;
+              background-repeat: no-repeat;
+              -webkit-box-shadow: 0 20px 10px 0 #000; 
+              -moz-box-shadow: 0 20px 10px 0 #000;
+              box-shadow: 0 20px 10px 0 #000;
+              }
+
+              .epoxy-bkg_1{
+                display:flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction:column;
+                width:100vw;
+                min-height: 100vh;
+                clip-path: none;
+                background-color:#000;
+                background: linear-gradient(rgba(17, 45, 78, 0.7),rgba(17,45,78,0.7)),url("../images/epoxy_training_8.jpeg") no-repeat;
+                background-position: center;
+                background-size: cover;
+                background-repeat: no-repeat;
+                }
+
+              .epoxy-bkg_1 h1{
+                top:30%;
+                align-self:center;
+                color:#fff;
+                width: 80%;
+                clip-path: none !important;
+                font-size:1rem;
+                -webkit-text-shadow: 0 20px 0px 0 rgba(0,0,0,0.9); 
+                -moz-text-shadow: 0 20px 50px 0 rgba(0,0,0,0.9);
+                text-shadow: 0 20px 50px 0 rgba(0,0,0,0.9);
+                }
+                .epoxy-bkg_2{
+                      width:100%;
+                }
+          }
       `}</style>
 
       <style jsx global>{`
