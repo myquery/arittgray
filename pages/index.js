@@ -421,6 +421,26 @@ export default function Home() {
                 .epoxy-bkg_2{
                       width:100%;
                 }
+
+
+        .epoxy_images{
+          display:flex;
+          justify-content: space-around;
+          align-items: center;
+          flex-wrap: wrap;
+       
+        }
+
+        .epoxy_images img{
+          width:40%;
+          height:100px;
+         
+          padding:0.3rem;
+          -webkit-box-shadow: 0 20px 50px 0 #000; 
+          -moz-box-shadow: 0 20px 50px 0 #000;
+          box-shadow: 0 20px 50px 0 #000;
+       
+        }
           }
       `}</style>
 
