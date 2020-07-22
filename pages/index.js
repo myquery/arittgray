@@ -46,6 +46,10 @@ export default function Home() {
           <img src="../images/epoxy_training_6.jpeg"/>
         </div>
             </div>
+            <div className="arrow">
+              <a href="#form"><span className="fa fa-arrow-down center"></span></a>
+              
+            </div>
           <div className="epoxy-bkg_2">
           {/* <Link href="/login"><button>Login</button></Link> */}
         <form className="epoxy-form" onSubmit={handleSubmit(onSubmit)}>
@@ -91,6 +95,7 @@ export default function Home() {
                  {errors.epoxy_training_phone && <span>This field is required</span>}
                 </label>
               <label htmlFor="epoxy_training_interest">Training interested in
+              <span id="form"></span>
               <select 
                 type="text" 
                 id="epoxy_training_interest"
@@ -441,6 +446,28 @@ export default function Home() {
           box-shadow: 0 20px 50px 0 #000;
        
         }
+        .arrow{
+          bottom:10px;
+          position: absolute;
+          left: -webkit-calc(50% - 30px);
+          left: -moz-calc(50% - 30px);
+          left: calc(50% - 30px);
+          bottom: 10;
+          z-index: 1;
+          border-radius: 50%;
+          background:#fff;
+          width:50px;
+          height:50px;
+          padding:0.5rem;
+          -webkit-box-shadow: 0 20px 50px 0 rgba(0,0,0,0.1);
+          -moz-box-shadow: 0 20px 50px 0 rgba(0,0,0,0.1);
+          box-shadow: 0 20px 50px 0 rgba(0,0,0,0.1);
+          text-align:center;
+          display:flex;
+          justify-content: center;
+          align-items: center;
+        }
+           
           }
       `}</style>
 
