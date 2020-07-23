@@ -8,12 +8,16 @@
     "start": "next start"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.14.0",
+    "detect-browser": "^5.1.1",
     "dotenv": "^8.2.0",
     "firebase": "^7.16.1",
     "firebase-admin": "^9.0.0",
     "firebase-functions": "^3.8.0",
     "next": "9.3.5",
     "next-firebase": "^1.0.15",
+    "nodemailer": "^6.4.10",
+    "nodemailer-smtp-transport": "^2.7.4",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-hook-form": "^6.0.7",
@@ -25,6 +29,7 @@
     "@babel/core": "^7.10.5",
     "@babel/preset-env": "^7.10.4",
     "cross-env": "^7.0.2",
+    "file-loader": "^6.0.0",
     "rimraf": "^3.0.2"
   }
 }

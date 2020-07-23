@@ -1,14 +1,25 @@
 import { useForm } from "react-hook-form";
 import { toast, ToastContainer } from 'react-nextjs-toast'
-
+// import {default as detect} from 'detect-browser';
 import Link from 'next/link'
 import Layout from '../components/layout'
 
 import {loadDatabase} from "../lib/db"
+// import {mailer} from "../api/mailer"
+// const browser = detect();
+// {  browser() ? dynamic(() => import( '../api/mailer' )): "dynamic(() => import( './browser' ))"}
+import states from './states.js'
 
 export default function Home() {
-  let db = loadDatabase()
-  const { register, handleSubmit, watch, errors} = useForm();
+
+
+
+// const mailer = async () => {
+//  let mail =  await mailer(props)
+//  return mail;
+// } 
+
+ const { register, handleSubmit, watch, errors} = useForm();
   const onSubmit = async (data, e)=> {
     let firebase = await loadDatabase(); 
     let db = firebase.firestore();
@@ -23,6 +34,11 @@ export default function Home() {
     //   toast.notify(`Something went wrong, Training session can't be booked`)
     // });
   }
+
+//  const execute = async = (data) =>{
+//   this.onSubmit(data, e);
+//   this.mailer(data);
+//  }
 
   return (
     <Layout>
@@ -83,8 +99,24 @@ export default function Home() {
                 <option value="male">Male</option>
                 <option value="female">Female</option>
               </select>
+           
               {errors.epoxy_training_gender && <span>This field is required</span>}
              </label>
+             <label htmlFor="epoxy__training_state"> State:
+             <select 
+                type="text" 
+                placeholder="state" 
+                id="epoxy_training_state"
+                name="epoxy_training_state"
+                ref={register({ required: true })} >
+                  {
+                    // console.log(states)
+                  states.map((state)=> {
+                    return <option key={state}>{state}</option>
+                  })
+                }
+              </select>
+              </label>
               <label htmlFor="epoxy_training_phone">Phone number
                 <input 
                 id="epoxy_training_phone" 
@@ -423,6 +455,15 @@ export default function Home() {
                 -moz-text-shadow: 0 20px 50px 0 rgba(0,0,0,0.9);
                 text-shadow: 0 20px 50px 0 rgba(0,0,0,0.9);
                 }
+
+                .epoxy-bkg_1 h2{
+                  top:5%;
+                  align-self:center;
+                  color:#fff;
+                  width: 80%;
+                  font-size:2rem;
+                  
+                  }
                 .epoxy-bkg_2{
                       width:100%;
                 }
