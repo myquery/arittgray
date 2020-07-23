@@ -8,7 +8,7 @@ import {loadDatabase} from "../lib/db"
 // import {mailer} from "../api/mailer"
 // const browser = detect();
 // {  browser() ? dynamic(() => import( '../api/mailer' )): "dynamic(() => import( './browser' ))"}
-import states from '../states.js'
+import states from '../api/states.js'
 
 export default function Home() {
 
