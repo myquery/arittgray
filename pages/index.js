@@ -112,7 +112,7 @@ export default function Home() {
                   {
                     // console.log(states)
                   states.map((state)=> {
-                    return <option key={state}>{state}</option>
+                    return <option key={state} value={state}>{state}</option>
                   })
                 }
               </select>
