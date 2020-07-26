@@ -14,5 +14,8 @@ module.exports = {
       );
       return config;
     },
+    env: {
+      password: "isiaki2020"
+    }
     // ...
   };
