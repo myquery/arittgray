@@ -1,21 +1,5 @@
-/**
- * Copyright 2015 Google Inc. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-'use strict';
-
 const functions = require('firebase-functions');
+
 const nodemailer = require('nodemailer');
 var smtpTransport = require('nodemailer-smtp-transport');
 // Configure the email transport using the default SMTP transport and a GMail account.
@@ -37,18 +21,15 @@ exports.sendEmailConfirmation = functions.database.ref('/epoxy-registrants/{uid}
   const val = snapshot.val();
 
   const mailOptions = {
-    from: 'Admin. <noreply@arittgray.com>',
-    to: val.epoxy_training_email,
-    subject: `Welcome, ${val.epoxy_training_fullname} to Arittgray Nigeria Limited Epoxy Installer Training` ,
-    html: `
-    <div style="display:flex; justify-content:center; align-items:center; width: 50%; height:auto; padding:10px; background:#dedede">
-    <h3>Your Booking for ${val.epoxy_training_interest} is confirmed</h3>
-
-    <p>
-    Except a feedback from us for the training confirmation date based your location
-    </p>
-    </div>
-    `
+    from: 'Arittgray. <noreplyinfo@arittgray.com>',
+    to: val.email,
+    subject: `Welcome, ${val.epoxy_training_fullname} to Arittgray` ,
+    html: `<div style="font-size:1rem;display:flex; justify-content:center; align-items:center; min-width:50%; box-shadow:1px 1px 4px rgba(0,0,0,0.2); background"#fff">
+    <h1>Welcome to Epoxy Pratical Training</h1>
+    <hr/>
+    <p>Hello, ${val.epoxy_training_fullname}; your application epoxy training has been received, further communcations will be forwarded to you</p>
+    <h6>Welcome on board!</h6>
+    </div>`
   };
 
 
@@ -58,4 +39,3 @@ exports.sendEmailConfirmation = functions.database.ref('/epoxy-registrants/{uid}
         val.epoxy_training_email))
     .catch((error) => console.error('There was an error while sending the email:', error));
 });
-
